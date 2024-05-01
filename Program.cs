@@ -1,7 +1,45 @@
-﻿class Program {
-    static void Main(string[] args){
-        Console.WriteLine("Enter your ID");
-        string? id = Console.ReadLine();
-        Console.WriteLine("Is your ID: "+ id);
+﻿using System;
+
+class Program {
+    static void Main(string[] args) {
+        string? id;
+        string? name;
+        int age;
+        string? condition;
+        string? verify;
+
+        while (true) {
+            Console.WriteLine("Enter your ID:");
+            id = Console.ReadLine();
+
+            Console.WriteLine("Enter your name:");
+            name = Console.ReadLine();
+
+            age = 0;  // Initialize age to zero for each iteration
+            while (true) {
+                Console.WriteLine("Enter your age:");
+                string? ageInput = Console.ReadLine();
+                if (ageInput != null && int.TryParse(ageInput, out age)) {
+                    break;
+                } else {
+                    Console.WriteLine("Invalid age. Please enter a valid number.");
+                }
+            }
+
+            Console.WriteLine("Enter your condition:");
+            condition = Console.ReadLine();
+
+            // Display the gathered information
+            Console.WriteLine("Is the following information correct? (If it is, enter 'yes'): ID: {0}, Name: {1}, Age: {2}, Condition: {3}", id, name, age, condition);
+            verify = Console.ReadLine();
+            if (verify?.ToLower() == "yes") {
+                break;
+            } else {
+                Console.WriteLine("Let's try entering the information again.");
+            }
+        }
+
+        Console.WriteLine("Thank you! Your information has been verified:");
+        Console.WriteLine("ID: {0}, Name: {1}, Age: {2}, Condition: {3}", id, name, age, condition);
     }
 }
