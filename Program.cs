@@ -1,5 +1,7 @@
 ﻿class Program {
     static void Main(string[] args){
-        Console.WriteLine("start");
+        Console.WriteLine("Enter your ID");
+        string? id = Console.ReadLine();
+        Console.WriteLine("Is your ID: "+ id);
     }
 }
