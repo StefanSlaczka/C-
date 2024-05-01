@@ -1,14 +1,45 @@
 ﻿using System;
 
-class Program {
-    static void Main(string[] args) {
+class Program
+{
+    static void Main(string[] args)
+    {
+        bool running = true;
+
+        while (running)
+        {
+            Console.WriteLine("Main Menu:");
+            Console.WriteLine("1. Add Patient");
+            Console.WriteLine("2. Exit");
+            Console.WriteLine("Please select an option (1-2):");
+
+            string? input = Console.ReadLine();
+
+            switch (input)
+            {
+                case "1":
+                    AddPatient();
+                    break;
+                case "2":
+                    running = false;
+                    break;
+                default:
+                    Console.WriteLine("Invalid option, please try again.");
+                    break;
+            }
+        }
+    }
+
+    static void AddPatient()
+    {
         string? id;
         string? name;
         int age;
         string? condition;
         string? verify;
 
-        while (true) {
+        while (true)
+        {
             Console.WriteLine("Enter your ID:");
             id = Console.ReadLine();
 
@@ -16,12 +47,16 @@ class Program {
             name = Console.ReadLine();
 
             age = 0;  // Initialize age to zero for each iteration
-            while (true) {
+            while (true)
+            {
                 Console.WriteLine("Enter your age:");
                 string? ageInput = Console.ReadLine();
-                if (ageInput != null && int.TryParse(ageInput, out age)) {
+                if (ageInput != null && int.TryParse(ageInput, out age))
+                {
                     break;
-                } else {
+                }
+                else
+                {
                     Console.WriteLine("Invalid age. Please enter a valid number.");
                 }
             }
@@ -32,9 +67,12 @@ class Program {
             // Display the gathered information
             Console.WriteLine("Is the following information correct? (If it is, enter 'yes'): ID: {0}, Name: {1}, Age: {2}, Condition: {3}", id, name, age, condition);
             verify = Console.ReadLine();
-            if (verify?.ToLower() == "yes") {
+            if (verify?.ToLower() == "yes")
+            {
                 break;
-            } else {
+            }
+            else
+            {
                 Console.WriteLine("Let's try entering the information again.");
             }
         }
