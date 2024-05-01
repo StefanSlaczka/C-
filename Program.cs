@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Collections.Generic;
 
 class Program
 {
@@ -7,12 +8,13 @@ class Program
     {
         bool running = true;
 
-        while (running)
+       while (running)
         {
             Console.WriteLine("Main Menu:");
             Console.WriteLine("1. Add Patient");
-            Console.WriteLine("2. Exit");
-            Console.WriteLine("Please select an option (1-2):");
+            Console.WriteLine("2. Search Patient by ID");
+            Console.WriteLine("3. Exit");
+            Console.WriteLine("Please select an option (1-3):");
 
             string? input = Console.ReadLine();
 
@@ -22,6 +24,9 @@ class Program
                     AddPatient();
                     break;
                 case "2":
+                    SearchPatientById();
+                    break;
+                case "3":
                     running = false;
                     break;
                 default:
@@ -98,4 +103,34 @@ class Program
             Console.WriteLine("An error occurred while writing to the file: " + ex.Message);
         }
     }
+
+    static void SearchPatientById()
+{
+    Console.WriteLine("Enter the ID of the patient to search:");
+    string? searchId = Console.ReadLine();
+
+    try
+    {
+        string filePath = "patients.txt";
+        string[] lines = File.ReadAllLines(filePath);
+        bool found = false;
+
+        foreach (string line in lines){
+            if (line.Contains($"ID: {searchId},")){
+                Console.WriteLine("Patient found:");
+                Console.WriteLine(line);
+                found = true;
+                break;
+            }
+        }
+
+        if (!found){
+            Console.WriteLine("No patient found with the ID: " + searchId);
+        }
+    }
+    catch (Exception ex){
+        Console.WriteLine("An error occurred while reading the file: " + ex.Message);
+    }
+}
+
 }
