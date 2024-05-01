@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 
 class Program
 {
@@ -77,7 +78,24 @@ class Program
             }
         }
 
+        SavePatientToFile(id, name, age, condition);
+
         Console.WriteLine("Thank you! Your information has been verified:");
         Console.WriteLine("ID: {0}, Name: {1}, Age: {2}, Condition: {3}", id, name, age, condition);
+    }
+
+    static void SavePatientToFile(string? id, string? name, int age, string? condition){
+        try{
+            string filePath = "patients.txt";
+
+            string patientData = $"ID: {id}, Name: {name}, Age: {age}, Condition: {condition}\n";
+
+            File.AppendAllText(filePath, patientData);
+
+            Console.WriteLine("Data saved to file successfully.");
+        }
+        catch (Exception ex){
+            Console.WriteLine("An error occurred while writing to the file: " + ex.Message);
+        }
     }
 }
